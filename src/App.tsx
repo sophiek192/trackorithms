@@ -1,5 +1,21 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import Home from "./pages/Home";
+import Game from "./pages/Game";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/1",
+    element: <Game />,
+  },
+]);
+
 function App() {
-  return <div className="text-red-500">YUP</div>;
+  return <RouterProvider router={router} />;
 }
 
 export default App;
