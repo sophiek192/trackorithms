@@ -16,6 +16,7 @@ type TrainContextType = {
   trainDrive: (destination: { x: number; y: number }) => Promise<void>;
   trainDriveBackwards: (destination: { x: number; y: number }) => Promise<void>;
   driveToStation: (stationId: number) => Promise<void>;
+  driveToStationCb: (newStationId: (oldStationId: number) => number) => Promise<void>;
   trainJump: (destination: { x: number; y: number }) => void;
   jumpToStation: (id: number) => void;
   cancelAllAnimations: () => void;
@@ -72,6 +73,14 @@ export default function TrainContextProvider({ children }: { children: React.Rea
     [map.stations, trainDrive]
   );
 
+  const driveToStationCb = useCallback(
+    async (newStationId: (oldStationId: number) => number) => {
+      const stationId = newStationId(trainStationId);
+      await driveToStation(stationId);
+    },
+    [driveToStation, trainStationId]
+  );
+
   const trainJump = useCallback(
     (destination: { x: number; y: number }) => {
       trainX.jump(destination.x);
@@ -118,6 +127,7 @@ export default function TrainContextProvider({ children }: { children: React.Rea
         trainDrive,
         trainDriveBackwards,
         driveToStation,
+        driveToStationCb,
         trainJump,
         jumpToStation,
         cancelAllAnimations,

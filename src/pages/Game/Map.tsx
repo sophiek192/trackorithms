@@ -1,21 +1,35 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 import Track from "./Track";
 import Station from "./Station";
 
 import Train from "./Train";
 import useTrain from "./useTrain";
+import { wait } from "../../utils";
+
+const INSTRUCTIONS = [
+  { instruction: "driveToStation", params: { stationId: 1 } },
+  { instruction: "driveToStation", params: { stationId: 2 } },
+  { instruction: "driveToStation", params: { stationId: 0 } },
+];
 
 export default function Map() {
-  const { map, scope, trainX, trainY, trainYaw, driveToStation, trainStationId } = useTrain();
+  const { map, scope, trainX, trainY, trainYaw, driveToStation } = useTrain();
+
+  const executeInstructions = useCallback(async () => {
+    while (true) {
+      for (const { instruction, params } of INSTRUCTIONS) {
+        if (instruction === "driveToStation") {
+          await driveToStation(params.stationId);
+          await wait(4500);
+        }
+      }
+    }
+  }, [driveToStation]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      driveToStation((trainStationId + 1) % map.stations.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [driveToStation, map.stations.length, trainStationId]);
+    executeInstructions();
+  }, [executeInstructions]);
 
   return (
     <>
