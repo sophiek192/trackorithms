@@ -1,4 +1,4 @@
-import { createContext, useCallback, useEffect, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import { MapType } from "../../types/MapType";
 import { MotionValue, useAnimate, useMotionValue, useSpring } from "framer-motion";
 import LEVEL1 from "./levels/level1";
@@ -6,6 +6,7 @@ import LEVEL1 from "./levels/level1";
 type TrainContextType = {
   map: MapType;
   setMap: React.Dispatch<React.SetStateAction<MapType>>;
+  resetMap: (newMap: MapType) => void;
   scope: React.RefObject<HTMLDivElement>;
   trainX: MotionValue<number>;
   trainY: MotionValue<number>;
@@ -14,6 +15,7 @@ type TrainContextType = {
   setTrainStationId: React.Dispatch<React.SetStateAction<number>>;
   trainDrive: (destination: { x: number; y: number }) => Promise<void>;
   trainDriveBackwards: (destination: { x: number; y: number }) => Promise<void>;
+  driveToStation: (stationId: number) => Promise<void>;
   trainJump: (destination: { x: number; y: number }) => void;
   jumpToStation: (id: number) => void;
   cancelAllAnimations: () => void;
@@ -62,10 +64,13 @@ export default function TrainContextProvider({ children }: { children: React.Rea
     [animate, trainX, trainY, trainYaw]
   );
 
-  useEffect(() => {
-    // when trainStationId changes, move the train to the new station
-    trainDrive(map.stations[trainStationId]);
-  }, [map.stations, trainDrive, trainStationId]);
+  const driveToStation = useCallback(
+    async (stationId: number) => {
+      setTrainStationId(stationId);
+      await trainDrive(map.stations[stationId]);
+    },
+    [map.stations, trainDrive]
+  );
 
   const trainJump = useCallback(
     (destination: { x: number; y: number }) => {
@@ -77,6 +82,7 @@ export default function TrainContextProvider({ children }: { children: React.Rea
 
   const jumpToStation = useCallback(
     (id: number) => {
+      setTrainStationId(id);
       trainJump(map.stations[id]);
     },
     [map.stations, trainJump]
@@ -88,11 +94,21 @@ export default function TrainContextProvider({ children }: { children: React.Rea
     trainYaw.stop();
   }, [trainX, trainY, trainYaw]);
 
+  const resetMap = useCallback(
+    (newMap: MapType) => {
+      cancelAllAnimations();
+      setMap(newMap);
+      trainJump(newMap.stations[0]);
+    },
+    [cancelAllAnimations, trainJump]
+  );
+
   return (
     <TrainContext.Provider
       value={{
         map,
         setMap,
+        resetMap,
         scope,
         trainX,
         trainY,
@@ -101,6 +117,7 @@ export default function TrainContextProvider({ children }: { children: React.Rea
         setTrainStationId,
         trainDrive,
         trainDriveBackwards,
+        driveToStation,
         trainJump,
         jumpToStation,
         cancelAllAnimations,

@@ -10,17 +10,13 @@ const LEVELS = [
 ];
 
 export default function LevelSelector() {
-  const { setMap, jumpToStation, cancelAllAnimations } = useTrain();
+  const { resetMap } = useTrain();
 
   return (
     <div className="absolute top-0 left-0 p-4">
       <select
         className="p-2 bg-white rounded-md border border-gray-300"
-        onChange={(e) => {
-          setMap(LEVELS[parseInt(e.target.value)].level);
-          cancelAllAnimations();
-          jumpToStation(0);
-        }}
+        onChange={(e) => resetMap(LEVELS[parseInt(e.target.value)].level)}
       >
         {LEVELS.map(({ name }, index) => (
           <option key={name} value={index}>

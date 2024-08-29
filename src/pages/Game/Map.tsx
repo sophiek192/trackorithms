@@ -7,15 +7,15 @@ import Train from "./Train";
 import useTrain from "./useTrain";
 
 export default function Map() {
-  const { map, scope, trainX, trainY, trainYaw, setTrainStationId } = useTrain();
+  const { map, scope, trainX, trainY, trainYaw, driveToStation, trainStationId } = useTrain();
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTrainStationId((prev) => (prev + 1) % map.stations.length);
+      driveToStation((trainStationId + 1) % map.stations.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [map.stations.length, setTrainStationId]);
+  }, [driveToStation, map.stations.length, trainStationId]);
 
   return (
     <>
