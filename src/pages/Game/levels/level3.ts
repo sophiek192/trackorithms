@@ -1,6 +1,6 @@
-import { MapType } from "../../types/MapType";
+import { MapType } from "../../../types/MapType";
 
-const STATIONS = {
+const LEVEL3 = {
   stations: [
     { x: 300, y: 500, name: "Central" },
     { x: 800, y: 700, name: "Martin Pl" },
@@ -13,4 +13,4 @@ const STATIONS = {
   ],
 } as const satisfies MapType;
 
-export default STATIONS;
+export default LEVEL3;

@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 
-import LEVEL1 from "./level1";
 import Track from "./Track";
 import Station from "./Station";
 
@@ -8,7 +7,7 @@ import Train from "./Train";
 import useTrain from "./useTrain";
 
 export default function Map() {
-  const { map, scope, trainX, trainY, trainYaw, setTrainStationId } = useTrain(LEVEL1);
+  const { map, scope, trainX, trainY, trainYaw, setTrainStationId } = useTrain();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -22,8 +21,8 @@ export default function Map() {
     <>
       <div className="relative w-[60%] bg-[#ddd]">
         <Train ref={scope} x={trainX} y={trainY} yaw={trainYaw} />
-        {map.stations.map((_, index) => (
-          <Station key={index} id={index} stations={map} />
+        {map.stations.map(({ x, y }, index) => (
+          <Station key={`${index}-${x}-${y}`} id={index} stations={map} />
         ))}
         {map.connections.map(([from, to], index) => (
           <Track key={index} stations={map} from={from} to={to} />

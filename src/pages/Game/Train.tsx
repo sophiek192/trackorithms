@@ -17,7 +17,7 @@ const Train = forwardRef(
     return (
       <motion.div
         ref={ref as AnimationScope}
-        className="w-12 h-6 bg-blue-500 z-50 absolute rounded-md"
+        className="w-12 h-6 bg-blue-500 z-50 absolute rounded-r-full"
         style={{
           x,
           y,
