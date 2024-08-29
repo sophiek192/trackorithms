@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Game from "./pages/Game";
-// import CTFPage from "./pages/Modules";
+import CTFPage from "./pages/Modules";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +12,10 @@ const router = createBrowserRouter([
   {
     path: "/1",
     element: <Game />,
+  },
+  {
+    path: "/2",
+    element: <CTFPage />,
   }
 ]);
 

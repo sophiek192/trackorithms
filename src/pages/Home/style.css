@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Cascadia+Mono:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+body {
+  margin: 0;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+svg {
+  height: 150%;
+}
+  
+/* Initial animation to bring the train to the center */
+@keyframes trainAnimationStop {
+  0% {
+    transform: translate(2500px, calc(-1 * 2500px * 0.57735026919));
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+/* Animation to make the train leave when triggered */
+@keyframes trainAnimationLeave {
+  0% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(-2500px, calc(2500px * 0.57735026919));
+  }
+}
+
+#Train {
+  animation: trainAnimationStop 5s ease-out forwards; /* Stops the train in the center */
+  transform: translate(2500px, calc(-1 * 2500px * 0.57735026919));
+}
+
+/* .button-container {
+  position: absolute;
+  top: 50px;  
+  left: 50px; 
+} 
+*/
+.button-container button {
+  position: absolute;
+  top: 100px; /* Adjust to control distance from the top */
+  left: 100px; /* Adjust to control distance from the left */
+  font-family: 'Cascadia Mono', monospace;
+  font-size: 40px; /* Adjust as needed */
+  color: #3fa2b7;
+  border: none;
+  cursor: pointer;
+  animation: float 3s ease-in-out infinite; /* Apply the float animation */
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0); /* Start and end at the original position */
+  }
+  50% {
+    transform: translateY(-10px); /* Move up by 10px at the midpoint */
+  }
+}
