@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import './style.css';
 
 export default function Home() {
-  const containerRefEmptyStation = useRef<HTMLDivElement>(null);
+  const containerRefFrontEndStation = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Fetch the HTML file and insert it into the component
-    fetch('./src/pages/Home/emptyStation.html') // Adjust the path based on your setup
+    fetch('./src/pages/Home/frontendStation.html') // Adjust the path based on your setup
       .then((response) => response.text())
       .then((html) => {
-        if (containerRefEmptyStation.current) {
-          containerRefEmptyStation.current.innerHTML = html;
+        if (containerRefFrontEndStation.current) {
+          containerRefFrontEndStation.current.innerHTML = html;
         }
       })
       .catch((error) => console.error('Error loading HTML:', error));
@@ -40,9 +40,9 @@ export default function Home() {
 
   return (
     <div>
-      <div ref={containerRefEmptyStation} />
+      <div ref={containerRefFrontEndStation} />
       <div className="button-container">
-        <button onClick={handleLeave}>Depart!</button>
+        <button onClick={handleLeave}>Go to learn!</button>
       </div>
     </div>
   );
