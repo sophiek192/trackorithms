@@ -2,6 +2,9 @@
 
 import { Link } from "react-router-dom";
 import "./home.css";
+import Leader from "./leader3.png";
+import Tutorial from "./tutorial-photo.png";
+import Train from "./train3.png";
 
 export default function Landing() {
   return (
@@ -14,19 +17,19 @@ export default function Landing() {
         <p className="title">Trackorithms</p>
       </header>
       <div>
-        <img className="main-photo" src="train3.png" />
+        <img className="main-photo" src={Train} />
       </div>
       <div className="main-grid">
         <button className="ricky-button leader-board">
           LEADERBOARD
-          <img className="leader-photo" src="leader3.png" />
+          <img className="leader-photo" src={Leader} />
         </button>
         <Link to="/levels" className="ricky-button play">
           PLAY
         </Link>
         <button className="ricky-button how-to">
           TUTORIAL
-          <img className="tut-photo" src="tutorial-photo.png" />
+          <img className="tut-photo" src={Tutorial} />
         </button>
       </div>
     </>
