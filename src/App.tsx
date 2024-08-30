@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Game from "./pages/Game";
 import CTFPage from "./pages/Modules";
 import Front from "./pages/frontend-station";
+import Landing from "./pages/Landing";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/modules/security",
     element: <CTFPage />,
+  },
+  {
+    path: "/landing",
+    element: <Landing />,
   },
 ]);
 
