@@ -21,7 +21,11 @@ const router = createBrowserRouter([
   {
     path: "/frontend-station",
     element: <Front />,
-  }
+  },
+  {
+    path: "/modules/security",
+    element: <CTFPage />,
+  },
 ]);
 
 function App() {
