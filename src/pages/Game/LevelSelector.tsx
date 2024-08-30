@@ -4,9 +4,9 @@ import LEVEL3 from "./levels/level3";
 import useTrain from "./useTrain";
 
 const LEVELS = [
-  { name: "Level 1", level: LEVEL1 },
-  { name: "Level 2", level: LEVEL2 },
-  { name: "Level 3", level: LEVEL3 },
+  { name: "Beginner", level: LEVEL1 },
+  { name: "Intermediate", level: LEVEL2 },
+  { name: "Advanced", level: LEVEL3 },
 ];
 
 export default function LevelSelector() {

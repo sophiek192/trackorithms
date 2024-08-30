@@ -2,9 +2,9 @@ import { MapType } from "../../../types/MapType";
 
 const LEVEL1 = {
   stations: [
-    { x: 300, y: 500, name: "Central" },
-    { x: 800, y: 700, name: "Martin Pl" },
-    { x: 800, y: 400, name: "Penrith" },
+    { x: 300, y: 500, name: "Making your first website!" },
+    { x: 800, y: 700, name: "Trackorithms" },
+    { x: 800, y: 400, name: "Design an app" },
   ],
   connections: [
     [0, 1],

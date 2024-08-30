@@ -33,14 +33,16 @@ export default function Map() {
 
   return (
     <>
-      <div className="relative w-[60%] bg-[#ddd]">
+      <div className="relative w-full bg-[#fafafa]">
         <Train ref={scope} x={trainX} y={trainY} yaw={trainYaw} />
         {map.stations.map(({ x, y }, index) => (
           <Station key={`${index}-${x}-${y}`} id={index} stations={map} />
         ))}
-        {map.connections.map(([from, to], index) => (
-          <Track key={index} stations={map} from={from} to={to} />
-        ))}
+        <div>
+          {map.connections.map(([from, to], index) => (
+            <Track key={index} stations={map} from={from} to={to} />
+          ))}
+        </div>
       </div>
     </>
   );

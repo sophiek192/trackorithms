@@ -18,7 +18,7 @@ export default function Track({
 
   return (
     <motion.div
-      className="absolute h-2 bg-blue-500 z-30"
+      className="absolute h-2 first:bg-blue-500 last:bg-green-500 [&:nth-child(2n)]:bg-yellow-500  bg-red-500 z-30"
       style={{
         x: fromPos.x,
         y: fromPos.y,
