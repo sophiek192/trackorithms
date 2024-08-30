@@ -7,7 +7,7 @@ export default function Home() {
 
   useEffect(() => {
     // Fetch the HTML file and insert it into the component
-    fetch("./src/pages/Home/frontendStation.html") // Adjust the path based on your setup
+    fetch("./src/pages/Home/securityStation.html") // Adjust the path based on your setup
       .then((response) => response.text())
       .then((html) => {
         if (containerRefFrontEndStation.current) {
